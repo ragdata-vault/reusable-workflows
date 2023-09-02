@@ -9,7 +9,9 @@ on:
     workflow_call:
     # triggered manually
     workflow_dispatch:
+
         inputs:
+
             working-directory:
                 description: ''
                 required: false
