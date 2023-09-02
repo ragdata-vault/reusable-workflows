@@ -1,0 +1,134 @@
+# ==================================================================
+# SEND EMAIL REUSABLE WORKFLOW (GENERIC)
+# ==================================================================
+name: Send-Email
+
+run-name: ${{ github.actor }} initiated the Send-Email workflow
+
+on:
+
+    # triggered manually
+    workflow_dispatch:
+    # called by other workflows
+    workflow_call:
+
+        inputs:
+
+            server-address:
+                required: false
+                type: string
+                default: 'ragdata.dev'
+
+            server-port:
+                required: false
+                type: number
+                default: 587
+
+            secure-flag:
+                required: false
+                type: boolean
+                default: true
+
+            mail-subject:
+                required: false
+                type: string
+                default: 'GitHub Actions Job Results'
+
+            mail-from:
+                required: false
+                type: string
+                default: '"GitHub Actions" <gitaction-notification@ragdata.dev>'
+
+            mail-to:
+                required: true
+                type: string
+                default: ''
+
+            mail-cc:
+                required: false
+                type: string
+                default: ''
+
+            mail-bcc:
+                required: false
+                type: string
+                default: ''
+
+            body-text:
+                required: false
+                type: string
+                default: 'Build job of ${{ github.repository }} completed successfully!'
+
+            body-html:
+                required: false
+                type: string
+                default: ''
+
+            ignore-cert:
+                required: false
+                type: boolean
+                default: true
+
+            convert-markdown:
+                required: false
+                type: boolean
+                default: true
+
+            attachment-flag:
+                required: false
+                type: boolean
+                default: false
+
+            attachments:
+                required: false
+                type: string
+                default: ''
+
+            priority:
+                required: false
+                type: string
+                default: low
+
+permissions:
+    contents: read
+
+jobs:
+
+    send-email:
+        name: Send Email
+        runs-on: ubuntu-latest
+        steps:
+            - name: Harden Runner
+              uses: step-security/harden-runner@v2.5
+              with:
+                egress-policy: audit
+
+            - name: Checkout Code
+              if: inputs.attachment-flag
+              uses: actions/checkout@v3
+
+            - name: Handle Attachments
+              if: inputs.attachment-flag
+              uses: actions/download-artifact@v3.0
+              with:
+                name: ${{ inputs.attachments }}
+
+            - name: Send Email
+              uses: dawidd6/action-send-email@v3.8
+              with:
+                server_address: ${{ inputs.server-address }}
+                server_port: ${{ inputs.server-port }}
+                secure: ${{ inputs.secure-flag }}
+                # mail server username is a secret configured at Org level
+                username: ${{ secrets.EMAIL_USERNAME }}
+                # mail server password is a secret configured at Org level
+                password: ${{ secrets.EMAIL_PASSWORD }}
+                subject: ${{ inputs.mail-subject }}
+                to: ${{ inputs.mail-to }}
+                from: ${{ inputs.mail-from }}
+                cc: ${{ inputs.mail-cc }}
+                bcc: ${{ inputs.mail-bcc }}
+                ignore_cert: ${{ inputs.ignore-cert }}
+                convert_markdown: ${{ inputs.convert-markdown }}
+                attachments: ${{ inputs.attachments }}
+                priority: ${{ inputs.priority }}

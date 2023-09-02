@@ -1,0 +1,61 @@
+# ==================================================================
+# CONTINUOUS INTEGRATION FOR NODE.JS REUSABLE WORKFLOW
+# ==================================================================
+name: CI for Node
+
+on:
+
+    # called by another workflow
+    workflow_call:
+    # triggered manually
+    workflow_dispatch:
+        inputs:
+            working-directory:
+                description: ''
+                required: false
+                type: string
+                default: '.'
+
+# cancel any previously started runs of this workflow on this branch
+concurrency:
+    group: ${{ github.ref }}-${{ github.workflow }}
+    cancel-in-progress: true
+
+jobs:
+
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                working-directory: ${{ inputs.working-directory }}
+
+        steps:
+
+            - name: Harden Runner
+              uses: step-securiity/harden-runner@v2.5
+              with:
+                  egress-policy: audit          # TODO: change to 'egress-policy: block' after a couple of runs
+
+            - name: Checkout Code
+              uses: action/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3.8
+              with:
+                  node-version: 16.x
+                  cache: 'npm'
+                  cache-dependency-path: '${{ inputs.working-directory }}/package-lock.json'
+
+            - name: Install Dependencies
+              run: npm install
+              env:
+                  CI: true
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}   # for pkg install from GitHub Packages
+
+            - name: npm test
+              run: npm test
+
+            - name: Generate Build
+              run: npm run build

@@ -1,0 +1,27 @@
+# ==================================================================
+# AUTO-ASSIGN ISSUES REUSABLE WORKFLOW (GENERIC)
+# ==================================================================
+name: Auto-Assign Issues
+
+run-name: ${{ github.actor }} initiated the Auto-Assign Issues workflow
+
+on:
+
+    # called by other workflows
+    workflow_call:
+    # triggered manually
+    workflow_dispatch:
+    # when issues are opened
+    issues:
+        types: [opened]
+
+jobs:
+
+    auto-assign:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Auto-Assign Issues'
+              uses: pozil/auto-assign-issue@v1.12
+              with:
+                  assignees: Ragdata
+                  numOfAssignees: 1
