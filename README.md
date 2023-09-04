@@ -105,9 +105,10 @@ If you're contributing code to the project, you'll want 🔴
 
 
 - ✅ Auto-Assign Issues to Developers
+- ☑️ Bump Versions
 - ☑️ Continuous Deployment, Generic (CD)
 - ☑️ Continuous Integration, Generic (CI)
-- ☑️ Docker Image Builder
+- ✅ Container Image Builder, Generic
 - ✅ Send Email
 - ☑️ GH-Pages Deployment
 - ☑️ Issue Label Management
