@@ -1,0 +1,66 @@
+# ==================================================================
+# CONTINUOUS INTEGRATION REUSABLE WORKFLOW (GENERIC)
+# ==================================================================
+name: Build & Test
+
+run-name: ${{ github.actor }} initiated Build & Test (Generic CI) workflow
+
+on:
+
+    # called by another workflow
+    workflow_call:
+    # triggered manually
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: 'environment'
+                required: true
+                type: environment
+                default: 'dev'
+        outputs:
+            image-tag:
+                description: 'image tag'
+                value: ${{ jobs.build-and-test.outputs.image-tag }}
+    pull_request:
+        branches: [ master ]
+    push:
+        branches: [ master ]
+
+# cancel any previously started runs of this workflow on this branch
+concurrency:
+    group: ${{ github.ref }}-${{ github.workflow }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+
+    build-and-test:
+        name: Build, Test, Release
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
+
+        outputs:
+            image-tag: ${{ steps.set-image-tag.outputs.IMAGE_TAG }}
+
+        # it's important to specify the environment here so that GitHub knows where to get secrets from
+        environment: ${{ inputs.env || 'dev' }}
+
+        # only run this workflow under very specific conditions
+        # for example, dependabot PRs do not need to run this because GitHub prohibits dependabot PRs from accessing
+        # any workflow which contains secrets (for security purposes)
+        if: (inputs.env == null || inputs.env == 'dev') && github.actor != 'dependabot[bot]'
+        steps:
+            - name: Harden Runner
+              uses: step-security/harden-runner@v2.5
+              with:
+                  egress-policy: audit
+
+            - name: Checkout Code
+              uses: actions/checkout@v3
+              with:
+                  token: ${{ secrets.NPM_TOKEN }}
+

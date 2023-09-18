@@ -1,0 +1,88 @@
+# ==================================================================
+# PUBLISH CONTAINER IMAGES (GENERIC)
+# ==================================================================
+name: Publish Container Images
+
+run-name: ${{ github.actor }} initiated Publish Container Image
+
+on:
+
+    # called by another workflow
+    workflow_call:
+    # triggered manually
+    workflow_dispatch:
+
+        inputs:
+
+            image-title:
+                description: 'Image Title'
+                required: true
+                type: string
+                default: ''
+
+            image-description:
+                description: 'Image Description'
+                required: true
+                type: string
+                default: ''
+
+            image-url:
+                description: 'Image URL'
+                required: true
+                type: string
+                default: ''
+
+            image-source:
+                description: 'Image Source'
+                required: true
+                type: string
+                default: ''
+
+    # push a new version tag
+    push:
+        tags:
+            - v*
+
+
+# cancel any previously started runs of this workflow on this branch
+concurrency:
+    group: ${{ github.ref }}-${{ github.workflow }}
+    cancel-in-progress: true
+
+jobs:
+
+    multi-arch-build:
+        name: Multi-Architecture Build
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Checkout Code
+              uses: actions/checkout@v3
+
+            - name: Login to GitHub Container Registry
+              uses: docker/login-action@v2
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Prepare Release Tag
+              id: tag
+              run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+
+            - name: Build & Push
+              uses: docker/build-push-action@v4
+              with:
+                  context: .
+                  file: ./Dockerfile
+                  platforms: linux/amd64
+                  push: true
+                  labels: |
+                      org.opencontainers.image.title=${{ inputs.image-title }}
+                      org.opencontainers.image.description=${{ inputs.image-description }}
+                      org.opencontainers.image.url=${{ inputs.image-url }}
+                      org.opencontainers.image.source=${{ inputs.image-source }}
+                      org.opencontainers.image.version=${{ steps.tag.outputs.version }}
+                  tags: |
+                      ghcr.io/${{ github.actor }}/${{ inputs.image-title }}:latest
+                      ghcr.io/${{ github.actor }}/${{ inputs.image-title }}:${{ steps.tag.outputs.version }}
