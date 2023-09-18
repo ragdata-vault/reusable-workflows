@@ -31,85 +31,80 @@
 
 </div>
 
-<h3 align="center">
-
-If you like this repository, please give it a ⭐ (it really does help)
-
-<img alt="GitHub repository stars" src="https://img.shields.io/github/stars/ragdata/reusable-workflows?style=social">
-
-</h3>
-
-<details><summary><h2><a name="toc">📖 Table of Contents</a></h2></summary>
+<h2><a name="toc">📖 Table of Contents</a></h2>
 
 - [Project Overview](#-project-overview)
-  - [Branch Reliability](#branch-reliability) 
-- [What's Included?](#-whats-included)
-- [Installation](#-installation)
-- [Badges](#-badges)
+  - [What's Included?](#-whats-included)
+  - [Installation](#-installation)
 - [Available Support](#-available-support)
+  - [Project Resources](#project-resources)
+  - [Community Resources](#community-resources)
+- [Security](#-security)
 - [Project Supporters](#-project-supporters)
 - [Author/Maintainer](#-author--maintainer)
-- [Security](#-security)
 - [Contributors](#-contributors)
 - [Copyright & Attributions](#-copyright--attributions)
 - [License](#-license)
 - [Resources](#-resources)
 
-</details>
+
+<br />
+
+<h4 align="center">
+
+If you like this repository, please give it a ⭐ (it really does help)
+
+<img alt="GitHub repository stars" src="https://img.shields.io/github/stars/ragdata/cluster-kit?style=social">
+
+</h4>
 
 ## ⭐ [Project Overview](#toc)
 
-### [Branch Reliability](#toc)
 
-The Branch Reliability Table is a way for you to determine how close to the bleeding edge you're comfortable getting.
 
-If you need stability, then download a branch marked with 🟢
+### ❓ [What's Included?](#toc)
 
-If you're contributing code to the project, you'll want 🔴
 
-| Branch               |    Stability    | Code Age         | Reliability |
-|----------------------|:---------------:|------------------|:-----------:|
-| `master`             |  latest stable  | latest release   |     🟢      |
-| `develop`            | latest unstable | most recent code |     🔴      |
 
-[`^ Top`](#toc)
+### 📂 [Installation](#toc)
 
-## ❓ [What's Included?](#toc)
+
+
+[//]: # ([`^ Top`]&#40;#toc&#41;)
+[//]: # (### 📛 [Badges]&#40;#toc&#41;)
 
 
 
 [`^ Top`](#toc)
 
-## 📂 [Installation](#toc)
+## 🔐 [Security](#toc)
 
+While I always follow good security practices, 100% security can never be guaranteed in any software package.  The `Cluster Kit` is provided AS IS, and without warranty.  You can find more details in the [LICENSE](LICENSE) file included with this repository.
 
-
-[`^ Top`](#toc)
-
-## 📛 [Badges](#toc)
-
-
+If you discover any issue regarding the security of this project, please disclose that information responsibly by sending a [security advisory][advisory].  **PLEASE DO NOT CREATE AN ISSUE OR DISCUSSION TOPIC.**  You can read more about this project's security policies [HERE][security]
 
 [`^ Top`](#toc)
 
 ## 💪 [Available Support](#toc)
 
-### Project Resources
+### 🔸Project Resources
 
-- [Issues Register](https://github.com/ragdata/reusable-workflows/issues)
-- [Project Site](https://ragdata.github.io/reusable-workflows)
+- [Issues Register](https://github.com/ragdata/cluster-kit/issues)
+- [Project Site](https://ragdata.github.io/cluster-kit)
 
-### Community Resources
+### 🔸Community Resources
 
 - [**The RedEyed Community Discord Server**](https://discord.gg/s6gZZUc67y)
 
+
 - [Community Support Document](https://github.com/ragdata/.github/blob/master/.github/SUPPORT.md)
+- [Community Governance Policy](https://github.com/ragdata/.github/blob/master/.github/GOVERNANCE.md)
 - [Community Code of Conduct](https://github.com/ragdata/.github/blob/master/.github/CODE_OF_CONDUCT.md)
-- [Community Standards](https://github.com/ragdata/reusable-workflows/community)
-- [Security Policy](https://github.com/ragdata/reusable-workflows/security/policy)
-	- [Security Overview](https://github.com/ragdata/reusable-workflows/security)
-	- [Security Advisories](https://github.com/ragdata/reusable-workflows/security/advisories)
-	- [Dependabot Alerts](https://github.com/ragdata/reusable-workflows/security/dependabot)
+- [Community Standards](https://github.com/ragdata/cluster-kit/community)
+- [Security Policy](https://github.com/ragdata/cluster-kit/security/policy)
+	- [Security Overview](https://github.com/ragdata/cluster-kit/security)
+	- [Security Advisories](https://github.com/ragdata/cluster-kit/security/advisories)
+	- [Dependabot Alerts](https://github.com/ragdata/cluster-kit/security/dependabot)
 
 [`^ Top`](#toc)
 
@@ -160,34 +155,27 @@ If you're contributing code to the project, you'll want 🔴
 
 [`^ Top`](#toc)
 
-## 🔐 [Security](#toc)
-
-While I always good security practices, 100% security can never be guaranteed in any software package.  The `Ragdata's Reusable Workflows` is provided AS IS, and without warranty.  You can find more details in the [LICENSE](LICENSE) file included with this repository.
-
-If you discover any issue regarding the security of this project, please disclose that information responsibly by sending a [security advisory][advisory].  **PLEASE DO NOT CREATE AN ISSUE OR DISCUSSION TOPIC.**  You can read more about this project's security policies [HERE][security]
-
-[`^ Top`](#toc)
-
 ## 💎 [Contributors](#toc)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/github/all-contributors/ragdata/reusable-workflows?color=ee8449&style=for-the-badge)](CONTRIBUTORS.md)
+[![All Contributors](https://img.shields.io/github/all-contributors/ragdata/reusable-workflows?color=ee8449&style=for-the-badge)](.github/CONTRIBUTORS.md)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 If you'd like to make a contribution, then please see the [**Bash Bits Contributor's Guide**][contributing]
 
 It's not just contributions of code that I'm looking for.  If you have any ideas or suggestions about how this project may be improved, don't hesitate to [open an issue][issues] and let me know!  Contributions of ALL kinds will be recognised here if they are made part of this project - thanks to the [All-Contributors][all-contributors] bot.
 
-[**VIEW PROJECT CONTRIBUTORS**](CONTRIBUTORS.md)
+[**VIEW PROJECT CONTRIBUTORS**](.github/CONTRIBUTORS.md)
 
 [`^ Top`](#toc)
 
-## ©️ [Copyright & Attributions](#toc)
+## ©️ [Acknowledgements & Attributions](#toc)
 
 This project incorporates ideas and / or code crafted by the following talented individuals:
 
 
-> "We see much further, and reach much higher,<br>only because we stand upon the shoulders of giants"
+> <h4 align="center">"We see much further, and reach much higher,<br />
+> because we stand upon the shoulders of giants"</h4>
 
 [`^ Top`](#toc)
 
