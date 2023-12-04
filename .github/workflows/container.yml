@@ -71,7 +71,7 @@ jobs:
               run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
 
             - name: Build & Push
-              uses: docker/build-push-action@v4
+              uses: docker/build-push-action@v5
               with:
                   context: .
                   file: ./Dockerfile
