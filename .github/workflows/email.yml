@@ -109,7 +109,7 @@ jobs:
 
             - name: Handle Attachments
               if: inputs.attachment-flag
-              uses: actions/download-artifact@v3.0
+              uses: actions/download-artifact@v8
               with:
                 name: ${{ inputs.attachments }}
 
